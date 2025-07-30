@@ -70,8 +70,7 @@ echo "$UNMAPPING_SECTION" > .olive/1/unmapping_dependencies.txt
 
 rm -f "$TEMP_LOG_FILE"
 
-echo '📂 .olive directory structure:' && ls -al .olive
-echo '📁 .olive/1 contents:' && ls -al .olive/1
+echo '📁 조회 결과 파일 조회: ls -al .olive/1:' && ls -al .olive/1
 
 echo "════════════════════════════════════════════════════════════════════════════════"
 echo "✅ OLIVE CLI Component 조회 완료"

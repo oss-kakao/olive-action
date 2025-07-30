@@ -12,8 +12,7 @@ if [ $? -ne 0 ]; then
   exit 1
 fi
 
-echo '📂 .olive directory structure:' && ls -al .olive
-echo '📁 .olive/1 contents:' && ls -al .olive/1
+echo '📁 분석 결과 파일 조회: ls -al .olive/1:' && ls -al .olive/1
 
 echo "════════════════════════════════════════════════════════════════════════════════"
 echo "✅ OLIVE CLI Analysis Complete"

@@ -63,7 +63,7 @@ if [ $? -ne 0 ]; then
   exit 1
 fi
 
-echo '✅ .olive folder contents:' && ls -al .olive
+echo '📁 초기화 결과 파일 조회: ls -al .olive' && ls -al .olive
 
 LOCAL_CONFIG_FILE=".olive/local-config.yaml"
 
