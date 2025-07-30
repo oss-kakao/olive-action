@@ -2,19 +2,19 @@
 set -e
 
 echo "════════════════════════════════════════════════════════════════════════════════"
-echo "🧩 STEP 6: OLIVE CLI Component Analysis"
+echo "🧩 STEP 6: OLIVE CLI Component 조회"
 echo "════════════════════════════════════════════════════════════════════════════════"
 echo '📋 Running component on repository...'
 
 TEMP_LOG_FILE=$(mktemp)
 
 if ! olive-cli component | tee "$TEMP_LOG_FILE"; then
-  echo '❌ OLIVE CLI component 분석 실패: 에러가 발생했습니다.'
+  echo '❌ OLIVE CLI component 조회 실패: 에러가 발생했습니다.'
   rm -f "$TEMP_LOG_FILE"
   exit 1
 fi
 
-echo "컴포넌트 매핑 및 언매핑 의존성 정보 저장 중..."
+echo "컴포넌트 매핑 및 매핑되지 않은 의존성 정보 저장 중..."
 
 MAPPING_SECTION=$(awk '
 BEGIN { found=0; printing=0; content=""; }
@@ -70,10 +70,9 @@ echo "$UNMAPPING_SECTION" > .olive/1/unmapping_dependencies.txt
 
 rm -f "$TEMP_LOG_FILE"
 
-echo '📂 .olive directory structure:' && ls -al .olive
-echo '📁 .olive/1 contents:' && ls -al .olive/1
+echo '📁 조회 결과 파일 조회: ls -al .olive/1:' && ls -al .olive/1
 
 echo "════════════════════════════════════════════════════════════════════════════════"
-echo "✅ OLIVE CLI Component Analysis Complete"
+echo "✅ OLIVE CLI Component 조회 완료"
 echo "════════════════════════════════════════════════════════════════════════════════"
 echo "" 

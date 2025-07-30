@@ -2,13 +2,13 @@
 set -e
 
 echo "════════════════════════════════════════════════════════════════════════════════"
-echo "🔍 STEP 3: Source Code Location Verification"
+echo "🔍 STEP 3: Source Code 위치 확인"
 echo "════════════════════════════════════════════════════════════════════════════════"
 echo '📋 Verifying source code location...'
 echo 'Current working directory:' && pwd
 echo 'Repository contents:' && ls -la
 
 echo "════════════════════════════════════════════════════════════════════════════════"
-echo "✅ Source Code Location Verification Complete"
+echo "✅ Source Code Location 위치 확인 완료"
 echo "════════════════════════════════════════════════════════════════════════════════"
 echo "" 

@@ -37,7 +37,7 @@ while [[ $# -gt 0 ]]; do
 done
 
 echo "════════════════════════════════════════════════════════════════════════════════"
-echo "🔧 STEP 4: OLIVE CLI Initialization"
+echo "🔧 STEP 4: OLIVE CLI 초기화"
 echo "════════════════════════════════════════════════════════════════════════════════"
 echo '📋 Initializing OLIVE CLI...'
 
@@ -63,26 +63,20 @@ if [ $? -ne 0 ]; then
   exit 1
 fi
 
-echo '✅ .olive folder contents:' && ls -al .olive
+echo '📁 초기화 결과 파일 조회: ls -al .olive' && ls -al .olive
 
 LOCAL_CONFIG_FILE=".olive/local-config.yaml"
 
 if [ -f "$LOCAL_CONFIG_FILE" ]; then
-  echo '✅ local-config.yaml 파일을 찾았습니다. jdk11Home 설정을 추가합니다.'
-  
-  echo '📄 변경 전 local-config.yaml 내용:'
-  cat "$LOCAL_CONFIG_FILE" | grep -A3 'scanInfo:'
-  
   # scanInfo 섹션에 jdk11Home 추가
   sed -i '/scanInfo:/,/executed:/ s|^\( *\)executed: .*|\1executed: null\n\1jdk11Home: /opt/openjdk-11|' "$LOCAL_CONFIG_FILE"
-  
-  echo '📄 변경 후 local-config.yaml 내용:'
+  echo '📄 local-config.yaml 내용:'
   cat "$LOCAL_CONFIG_FILE" | grep -A4 'scanInfo:'
 else
   echo '⚠️ 경고: local-config.yaml 파일을 찾을 수 없습니다. jdk11Home 설정을 건너뜁니다.'
 fi
 
 echo "════════════════════════════════════════════════════════════════════════════════"
-echo "✅ OLIVE CLI Initialization Complete"
+echo "✅ OLIVE CLI 초기화 완료"
 echo "════════════════════════════════════════════════════════════════════════════════"
 echo ""

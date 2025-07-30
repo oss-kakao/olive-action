@@ -28,7 +28,7 @@ module.exports = async ({ github, context, core }) => {
       "- 🎯 프로젝트 이름: `" +
       data.projectName +
       "`\n" +
-      "- 🔗 상세 로그: [GitHub Actions 실행 결과](" +
+      "- 🔗 상세 로그: [OLIVE Action 실행 결과](" +
       data.runUrl +
       ")\n" +
       "- 💡 FAQ: [OLIVE CLI 실행 에러](https://olive.kakao.com/docs/cli/faq)\n\n"

@@ -2,7 +2,7 @@
 set -e
 
 echo "════════════════════════════════════════════════════════════════════════════════"
-echo "🔐 STEP 1: Required Tokens Validation"
+echo "🔐 STEP 1: 필수 토큰 유효성 확인"
 echo "════════════════════════════════════════════════════════════════════════════════"
 
 GITHUB_TOKEN=""
@@ -44,12 +44,12 @@ if [ -z "$OLIVE_TOKEN" ]; then
   echo "📋 해결 방법:"
   echo "1. Repository Settings > Secrets and variables > Actions로 이동"
   echo "2. New repository secret을 클릭"
-  echo "3. Name: OLIVE_TOKEN, Value: 당신의 OLIVE 토큰을 입력"
+  echo "3. Name: OLIVE_TOKEN, Value: OLIVE Platform API 토큰 토큰 입력"
   echo "4. workflow 파일에서 다음과 같이 설정:"
   echo "   with:"
   echo "     olive-token: \${{ secrets.OLIVE_TOKEN }}"
   echo ""
-  echo "🔗 OLIVE 토큰 발급: https://olive.kakao.com"
+  echo "🔗 OLIVE Platform API 토큰 발급: https://olive.kakao.com"
   echo ""
   exit 1
 fi
@@ -57,6 +57,6 @@ fi
 echo "✅ 모든 필수 토큰이 설정되었습니다."
 
 echo "════════════════════════════════════════════════════════════════════════════════"
-echo "✅ Required Tokens Validation Complete"
+echo "✅ 필수 토큰 유효성 확인 완료"
 echo "════════════════════════════════════════════════════════════════════════════════"
 echo "" 

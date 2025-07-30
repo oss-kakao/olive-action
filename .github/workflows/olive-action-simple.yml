@@ -19,14 +19,14 @@ permissions:
 
 jobs:
   olive-scan:
-    name: OLIVE CLI Scan
+    name: OLIVE Action
     runs-on: ubuntu-latest
 
     steps:
       - name: Checkout Code
         uses: actions/checkout@v4
 
-      - name: Run OLIVE CLI Scanner
+      - name: Run OLIVE Action
         uses: ./
         with:
           olive-token: ${{ secrets.OLIVE_TOKEN }}
