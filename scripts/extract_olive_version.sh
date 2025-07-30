@@ -2,7 +2,7 @@
 set -e
 
 echo "════════════════════════════════════════════════════════════════════════════════"
-echo "📦 STEP 9: OLIVE CLI Version Extraction"
+echo "📦 STEP 9: OLIVE CLI Version 조회"
 echo "════════════════════════════════════════════════════════════════════════════════"
 echo "🔍 Extracting OLIVE CLI version..."
 OLIVE_VERSION=$(olive-cli --version 2>&1 | head -n1 | sed 's/^[[:space:]]*//' | sed 's/[[:space:]]*$//')
@@ -18,6 +18,6 @@ echo "$OLIVE_VERSION" > /home/deploy/repository/.olive/1/olive_version.txt
 echo "📦 OLIVE CLI Version: $OLIVE_VERSION"
 
 echo "════════════════════════════════════════════════════════════════════════════════"
-echo "✅ OLIVE CLI Version Extraction Complete"
+echo "✅ OLIVE CLI Version 조회 완료"
 echo "════════════════════════════════════════════════════════════════════════════════"
 echo "" 

@@ -2,7 +2,7 @@
 set -e 
 
 echo "════════════════════════════════════════════════════════════════════════════════"
-echo "📄 STEP 7: OLIVE CLI License Analysis"
+echo "📄 STEP 7: OLIVE CLI License 조회"
 echo "════════════════════════════════════════════════════════════════════════════════"
 echo '📋 Running license on repository...'
 
@@ -49,6 +49,6 @@ echo '📂 .olive directory structure:' && ls -al .olive
 echo '📁 .olive/1 contents:' && ls -al .olive/1
 
 echo "════════════════════════════════════════════════════════════════════════════════"
-echo "✅ OLIVE CLI License Analysis Complete"
+echo "✅ OLIVE CLI License 조회 완료"
 echo "════════════════════════════════════════════════════════════════════════════════"
 echo "" 

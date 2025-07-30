@@ -119,11 +119,11 @@ jobs:
             cat ./olive-apply-results/mapping.json | jq '.' 2>/dev/null || cat ./olive-apply-results/mapping.json
           fi
 
-          # 언매핑 CSV 파일 확인
+          # 매핑 결과 CSV 파일 확인
           if [ -f "./olive-apply-results/unmapping.csv" ]; then
-            echo "📈 언매핑 개수:"
+            echo "📈 매핑되지 않은 의존성 개수:"
             wc -l ./olive-apply-results/unmapping.csv
-            echo "📋 언매핑 내용:"
+            echo "📋 매핑되지 않은 의존성 내용:"
             cat ./olive-apply-results/unmapping.csv
           fi
 

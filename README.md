@@ -70,16 +70,16 @@ jobs:
 Action의 동작을 제어하기 위한 입력값입니다. `with` 키워드를 사용하여 설정할 수 있습니다.
 
 
-| 이름 | 설명 | 필수 | 기본값 |
-| :--- | :--- | :---: | :--- |
-| `olive-token` | [OLIVE Platform](https://olive.kakao.com/) API 토큰. GitHub Secrets에 저장하여 사용해야 합니다. | **Y** | - |
-| `github-token` | PR에 코멘트를 작성하기 위한 GitHub 토큰입니다. `${{ secrets.GITHUB_TOKEN }}` 사용을 권장합니다. | **Y** | - |
-| `olive-project-name` | OLIVE Platform에 등록될 프로젝트 이름입니다. | N | 저장소 이름 (`kakao/olive`의 경우 olive) |
-| `source-path` | 분석할 소스코드의 루트 경로입니다. | N | `./` |
-| `user-config-path` | OLIVE CLI의 기본 설정을 덮어쓸 사용자 정의 `config` 파일의 경로입니다. | N | `""` |
-| `artifact-retention-days` | 생성된 아티팩트의 보관 기간(일)입니다. | N | `30` |
-| `comment-on-pr` | `true`로 설정 시, PR에 분석 결과 코멘트를 작성합니다. | N | `true` |
-| `analyze-only` | `true`로 설정 시, 분석만 수행하고 결과를 OLIVE Platform에 전송하지 않습니다. | N | `false` |
+| 이름 | 설명                                                                                     |   필수    | 기본값                                     |
+| :--- |:---------------------------------------------------------------------------------------|:-------:|:----------------------------------------|
+| `olive-token` | [OLIVE Platform](https://olive.kakao.com/) API 토큰. <br/>GitHub Secrets에 저장하여 사용해야 합니다. |  **Y**  | -                                       |
+| `github-token` | PR에 코멘트를 작성하기 위한 GitHub 토큰입니다.<br/> `${{ secrets.GITHUB_TOKEN }}` 사용을 권장합니다.          |  **Y**  | -                                       |
+| `olive-project-name` | OLIVE Platform에 등록될 프로젝트 이름입니다.                                                        |    N    | 저장소 이름<br/>(`kakao/olive`의 경우 olive)    |
+| `source-path` | 분석할 소스코드의 루트 경로입니다.                                                                    |    N    | `./`                                    |
+| `user-config-path` | OLIVE CLI의 기본 설정을 덮어쓸 사용자 정의 `config` 파일의 경로입니다.                                       |    N    | `""`                                    |
+| `artifact-retention-days` | 생성된 아티팩트의 보관 기간(일)입니다.                                                                 |    N    | `30`                                    |
+| `comment-on-pr` | `true`로 설정 시, PR에 분석 결과 코멘트를 작성합니다.                                                    |    N    | `true`                                  |
+| `analyze-only` | `true`로 설정 시, 분석만 수행하고 결과를 OLIVE Platform에 전송하지 않습니다.                                  |    N    | `false`                                 |
 
 
 ## 다양한 사용법 예시 (Advanced Usage)
@@ -116,7 +116,7 @@ Action의 동작을 제어하기 위한 입력값입니다. `with` 키워드를 
 ### 3\. 사용자 정의 `config` 파일 사용하기
 
 프로젝트에 사용자 정의 config 파일을 생성하여 OLIVE CLI의 세부 동작을 제어할 수 있습니다.
-아래 예시는 프로젝트 루트에 `user-config.yaml` 파일을 사용하는 경우 입니다.
+아래 예시는 프로젝트 루트에 `user-config.yml` 파일을 사용하는 경우 입니다.
 
 ```yaml
 - name: Run OLIVE Action with custom config
@@ -124,10 +124,10 @@ Action의 동작을 제어하기 위한 입력값입니다. `with` 키워드를 
   with:
     olive-token: ${{ secrets.OLIVE_TOKEN }}
     github-token: ${{ secrets.GITHUB_TOKEN }}
-    user-config-path: "./user-config.yaml"
+    user-config-path: "./user-config.yml"
 ```
 
-**`user-config.yaml` 파일 예시:**
+**`user-config.yml` 파일 예시:**
 
 ```yaml
 isOpenSource: false  # 소스 코드 공개 여부 (기본값: false)
@@ -147,7 +147,7 @@ excludeGradle:  # Gradle 빌드 수행시 제외할 모듈 이름
 Action이 성공적으로 실행되면 다음과 같은 결과를 확인할 수 있습니다.
 
 
-### 1\. GitHub Artifacts
+### 1\. GitHub 아티팩트(Artifacts)
 
   * **local-config.yaml**: Action 실행에 사용된 OLIVE CLI 설정 파일
 

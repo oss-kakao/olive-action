@@ -4,18 +4,18 @@ module.exports = async ({ github, context, core }) => {
   const inputData = getInputData(core)
 
   const {
-    oliveVersion,
+    oliveCliVersion,
     mappingComponentsInfo,
     unmappingDependenciesInfo,
     licenseInfo,
     hasLicenseIssue,
     hasLicenses,
-  } = await readOliveData(fs, inputData.oliveVersion)
+  } = await readOliveData(fs, inputData.oliveCliVersion)
 
   const oliveScanUrl = await generateOliveScanUrl(fs, core)
 
   const commentBody = generateCommentBody({
-    oliveVersion,
+    oliveCliVersion: oliveCliVersion,
     projectName: inputData.projectName,
     runUrl: inputData.runUrl,
     oliveScanUrl,
@@ -36,20 +36,20 @@ module.exports = async ({ github, context, core }) => {
  */
 function getInputData(core) {
   return {
-    oliveVersion: core.getInput("olive-version") || "Unknown",
+    oliveCliVersion: core.getInput("olive-version") || "Unknown",
     runUrl: core.getInput("run-url"),
     projectName: core.getInput("project-name"),
   }
 }
 
 /**
- * OLIVE 관련 데이터 파일에서 읽기
+ * OLIVE Action 결과 파일에서 읽기
  * @param {Object} fs - Node.js fs 모듈
- * @param {string} defaultVersion - 기본 OLIVE 버전
- * @returns {Object} OLIVE 데이터 객체
+ * @param {string} defaultVersion - 기본 OLIVE CLI 버전
+ * @returns {Object} OLIVE Action 분석 결과 데이터 객체
  */
 async function readOliveData(fs, defaultVersion) {
-  let oliveVersion = defaultVersion
+  let oliveCliVersion = defaultVersion
   let mappingComponentsInfo = "정보를 불러올 수 없습니다."
   let unmappingDependenciesInfo = "정보를 불러올 수 없습니다."
   let licenseInfo = "정보를 불러올 수 없습니다."
@@ -58,10 +58,10 @@ async function readOliveData(fs, defaultVersion) {
 
   try {
     if (fs.existsSync(".olive/1/olive_version.txt")) {
-      oliveVersion = fs.readFileSync(".olive/1/olive_version.txt", "utf8").trim()
-      console.log("📦 파일에서 읽은 OLIVE CLI 버전:", oliveVersion)
+      oliveCliVersion = fs.readFileSync(".olive/1/olive_version.txt", "utf8").trim()
+      console.log("📦 파일에서 읽은 OLIVE CLI 버전:", oliveCliVersion)
     } else {
-      console.log("⚠️ 버전 정보 파일을 찾을 수 없습니다. 기본값 사용:", oliveVersion)
+      console.log("⚠️ 버전 정보 파일을 찾을 수 없습니다. 기본값 사용:", oliveCliVersion)
     }
 
     mappingComponentsInfo = readFileWithFallback(
@@ -85,7 +85,7 @@ async function readOliveData(fs, defaultVersion) {
   }
 
   return {
-    oliveVersion,
+    oliveCliVersion: oliveCliVersion,
     mappingComponentsInfo,
     unmappingDependenciesInfo,
     licenseInfo,
@@ -179,16 +179,16 @@ function checkLicenseIssues(licenseInfo) {
 }
 
 /**
- * OLIVE scan URL 생성
+ * OLIVE Platform scan URL 생성
  * @param {Object} fs - Node.js fs 모듈
  * @param {Object} core - @actions/core 객체
- * @returns {string|null} OLIVE scan URL 또는 null
+ * @returns {string|null} OLIVE Platform scan URL 또는 null
  */
 async function generateOliveScanUrl(fs, core) {
   let oliveScanUrl = null
 
   try {
-    console.log("🔍 OLIVE scan URL 생성 시작...")
+    console.log("🔍 OLIVE Platform scan URL 생성 시작...")
     const host = "https://olive.kakao.com"
     if (!host) {
       console.log("❌ host 정보가 없어 URL을 생성할 수 없음")
@@ -203,14 +203,14 @@ async function generateOliveScanUrl(fs, core) {
 
     oliveScanUrl = extractScanUrlFromConfig(fs, configPath, host)
   } catch (error) {
-    console.error("OLIVE scan URL 생성 오류:", error)
+    console.error("OLIVE Platform scan URL 생성 오류:", error)
   }
 
   return oliveScanUrl
 }
 
 /**
- * config 파일 경로 찾기
+ * local-config 파일 경로 찾기
  * @param {Object} fs - Node.js fs 모듈
  * @returns {string|null} 파일 경로 또는 null
  */
@@ -235,11 +235,11 @@ function findConfigFile(fs) {
 }
 
 /**
- * config 파일에서 URL 정보 추출
+ * local-config 파일에서 URL 정보 추출
  * @param {Object} fs - Node.js fs 모듈
  * @param {string} configPath - 설정 파일 경로
- * @param {string} host - OLIVE 호스트 URL
- * @returns {string|null} OLIVE scan URL 또는 null
+ * @param {string} host - OLIVE Platform 호스트 URL
+ * @returns {string|null} OLIVE Platform scan URL 또는 null
  */
 function extractScanUrlFromConfig(fs, configPath, host) {
   const logConfig = fs.readFileSync(configPath, "utf8")
@@ -259,7 +259,7 @@ function extractScanUrlFromConfig(fs, configPath, host) {
     console.log("📊 추출된 scanHash:", scanHash)
 
     const url = `${host}/project/detail/summary?p=${projectHash}&r=${scanHash}`
-    console.log("🔗 OLIVE scan 결과 URL 생성:", url)
+    console.log("🔗 OLIVE Platform scan 결과 URL 생성:", url)
     return url
   }
 
@@ -280,18 +280,18 @@ function generateCommentBody(data) {
   }
 
   const oliveScanLink = data.oliveScanUrl
-    ? `- 🔗 OLIVE 분석결과: [OLIVE scan 결과 자세히보기](${data.oliveScanUrl})\n`
+    ? `- 🔗 OLIVE Platform 분석결과: [OLIVE Platform scan 결과 자세히보기](${data.oliveScanUrl})\n`
     : ""
 
   return (
-    "## 🛡️ OLIVE CLI 스캔\n\n" +
+    "## 🛡️ OLIVE Action\n\n" +
     "- 📦 OLIVE CLI 버전: `" +
-    data.oliveVersion +
+    data.oliveCliVersion +
     "`\n" +
     "- 🎯 프로젝트 이름: `" +
     data.projectName +
     "`\n" +
-    "- 🔗 상세 로그: [GitHub Actions 실행 결과](" +
+    "- 🔗 상세 로그: [OLIVE Action 실행 결과](" +
     data.runUrl +
     ")\n" +
     oliveScanLink +
@@ -326,7 +326,7 @@ async function createOrUpdateComment(github, context, commentBody) {
   })
 
   const existingComment = comments.data.find(
-    (comment) => comment.body && comment.body.includes("🛡️ OLIVE CLI 스캔")
+    (comment) => comment.body && comment.body.includes("🛡️ OLIVE Action")
   )
 
   if (existingComment) {
