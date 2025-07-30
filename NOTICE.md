@@ -1,4 +1,4 @@
-# OSS Notice | OLIVE-Action
+# OSS Notice | OLIVE Action
 
 This application is Copyright © Kakao Corp. All rights reserved.
 

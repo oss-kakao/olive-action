@@ -35,7 +35,7 @@ workflow는 저장소의 `.github/workflows/` 에 생성됩니다.
 
 
 ```yaml
-name: OLIVE CLI Scanner
+name: OLIVE Action 
 
 on:
   pull_request:
@@ -57,7 +57,7 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
-      - name: Run OLIVE CLI Scanner
+      - name: Run OLIVE Action 
         uses: kakao/olive-actions@v1
         with:
           olive-token: ${{ secrets.OLIVE_TOKEN }}
@@ -89,7 +89,7 @@ Action의 동작을 제어하기 위한 입력값입니다. `with` 키워드를 
 프로젝트 이름, 소스 경로, 아티팩트 보관 기간 등을 직접 지정할 수 있습니다.
 
 ```yaml
-- name: Run OLIVE CLI Scanner with custom settings
+- name: Run OLIVE Action with custom settings
   uses: kakao/olive-actions@v1
   with:
     olive-project-name: "my-custom-project"
@@ -105,7 +105,7 @@ Action의 동작을 제어하기 위한 입력값입니다. `with` 키워드를 
 `analyze-only`를 `true`로 설정하면, OLIVE Platform에 프로젝트를 생성하거나 결과를 전송하지 않고 분석만 수행합니다.
 
 ```yaml
-- name: Run OLIVE CLI Scanner (analysis only)
+- name: Run OLIVE Action (analysis only)
   uses: kakao/olive-actions@v1
   with:
     olive-token: ${{ secrets.OLIVE_TOKEN }}
@@ -119,7 +119,7 @@ Action의 동작을 제어하기 위한 입력값입니다. `with` 키워드를 
 아래 예시는 프로젝트 루트에 `user-config.yaml` 파일을 사용하는 경우 입니다.
 
 ```yaml
-- name: Run OLIVE CLI Scanner with custom config
+- name: Run OLIVE Action with custom config
   uses: kakao/olive-actions@v1
   with:
     olive-token: ${{ secrets.OLIVE_TOKEN }}
