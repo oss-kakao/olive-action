@@ -18,7 +18,7 @@ permissions:
   pull-requests: write
 
 jobs:
-  olive-scan:
+  olive-action:
     name: OLIVE Action
     runs-on: ubuntu-latest
 
